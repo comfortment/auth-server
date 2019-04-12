@@ -1,0 +1,13 @@
+{
+  "name": "comfortment",
+  "description": "Comfortment IAS(Incredible Authentication Server)",
+  "memory": 128,
+  "timeout": 5,
+  "handler": "lib.default",
+  "role": "arn:aws:iam::002257341422:role/comfortment_lambda_function",
+  "environment": {},
+  "hooks": {
+    "clean": "rm -rf lib",
+    "build": "../../node_modules/.bin/webpack --config ../../webpack.config.js --bail"
+  }
+}
