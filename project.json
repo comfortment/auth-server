@@ -1,5 +1,5 @@
 {
-  "name": "comfortment",
+  "name": "comfortment-auth",
   "description": "Comfortment IAS(Incredible Authentication Server)",
   "memory": 128,
   "timeout": 5,

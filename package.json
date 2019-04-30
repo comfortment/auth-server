@@ -19,7 +19,6 @@
   "devDependencies": {
     "@types/aws-lambda": "^8.10.23",
     "awesome-typescript-loader": "^3.2.1",
-    "lodash": "^4.17.11",
     "tslint": "^5.5.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-loader": "^3.5.3",

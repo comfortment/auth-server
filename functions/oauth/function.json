@@ -1,7 +1,0 @@
-{
-    "description": "oauth",
-    "runtime": "nodejs8.10",
-    "memory": 128,
-    "timeout": 5,
-    "role": "arn:aws:iam::002257341422:role/comfortment_lambda_function"
-}
