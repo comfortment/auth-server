@@ -1,8 +1,3 @@
-export interface APIGatewayProxyBody {
-  oauthToken: string;
-  tokenType: string;
-}
-
 export interface JWTPayload {
   id: string,
   type: string
