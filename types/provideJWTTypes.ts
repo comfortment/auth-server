@@ -1,10 +1,6 @@
-export interface GetJWTRequest {
+export interface APIGatewayProxyBody {
   oauthToken: string;
-}
-
-export interface GetJWTResponse {
-  accessToken: string;
-  refreshToken: string;
+  tokenType: string;
 }
 
 export interface JWTPayload {
@@ -14,4 +10,19 @@ export interface JWTPayload {
 
 export interface JWTOptions {
   expiresIn: string
+}
+
+export interface DeveloperTokenPayload { 
+  data: {
+    access_token: string,
+    token_type: string
+  }
+}
+
+export interface VerifyReponse {
+  data: {
+    data: {
+      is_valid: boolean
+    }
+  }
 }
