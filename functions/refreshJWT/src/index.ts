@@ -55,7 +55,7 @@ const handler: Handler = async (
     return {
       statusCode: 401,
       body: JSON.stringify({
-        message: "This user isn't owner of refreshToken"
+        message: "Unusable token"
       })
     }; 
   }
