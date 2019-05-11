@@ -1,7 +1,7 @@
 import * as jwt from "jsonwebtoken";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 
-import { JWTPayload, JWTOptions } from "../../../types/provideJWTTypes";
+import { JWTPayload, JWTOptions } from "../../../types/JWTTypes";
 import { dynamoDBClient } from "../../../aws"
 import { DYNAMODB_COMFORTMENT_AUTH } from "../../../constant";
 

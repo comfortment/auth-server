@@ -4,6 +4,7 @@ import { Handler, APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda
 import { verifyFacebook, verifyKakao } from "./oauth";
 import { generateJWT, saveRefreshToken } from "./jwt";
 import { AUTHORIZATION_HEADER } from "../../../constant"
+import { JWT_ACCESS_TOKEN_EXPIRY, JWT_REFRESH_TOKEN_EXPIRY } from "../../../constant";
 
 
 const handler: Handler = async (
@@ -45,8 +46,12 @@ const handler: Handler = async (
   if (isValid) {
     const identity = uuid();
 
-    const accessToken = await generateJWT({id: identity, type: 'access'}, {expiresIn: '3h'});
-    const refreshToken = await generateJWT({id: identity, type: 'refresh'}, {expiresIn: '30d'});
+    const accessToken = await generateJWT(
+      {id: identity, type: 'access'}, {expiresIn: JWT_ACCESS_TOKEN_EXPIRY}
+    );
+    const refreshToken = await generateJWT(
+      {id: identity, type: 'refresh'}, {expiresIn: JWT_REFRESH_TOKEN_EXPIRY}
+    );
     
     try {
       await saveRefreshToken(identity, refreshToken);

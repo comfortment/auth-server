@@ -3,5 +3,8 @@
   "runtime": "nodejs8.10",
   "memory": 128,
   "timeout": 5,
-  "role": "arn:aws:iam::002257341422:role/comfortment_lambda_function"
+  "role": "arn:aws:iam::002257341422:role/comfortment_lambda_function",
+  "environment": {
+    "SECRET_KEY": "fjf90349gn3jf39#$kf902jfk5%d9dj3@1jfi4nfro"
+  }
 }

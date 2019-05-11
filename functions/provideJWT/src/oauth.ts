@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { DeveloperTokenPayload, VerifyReponse } from "../../../types/provideJWTTypes";
+import { DeveloperTokenPayload, VerifyReponse } from "../../../types/oauthTypes";
 
 
 export const verifyFacebook = async (oauthToken: string): Promise<boolean> => {
