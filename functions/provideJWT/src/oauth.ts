@@ -3,7 +3,7 @@ import axios from "axios";
 import { DeveloperTokenPayload, VerifyReponse } from "../../../types/oauthTypes";
 
 
-export const verifyFacebook = async (oauthToken: string): Promise<boolean> => {
+export const verifyFacebook = async (oauthToken: string): Promise<string | undefined> => {
   const environmentVars = process.env;
 
   let developerToken: DeveloperTokenPayload;
@@ -34,10 +34,9 @@ export const verifyFacebook = async (oauthToken: string): Promise<boolean> => {
     console.error(err);
     throw err;
   }
-
-  return verifyResponse.data.data.is_valid;
+  return verifyResponse.data.data.user_id;
 };
 
-export const verifyKakao = async (token: string): Promise<boolean> => {
-  return true;
+export const verifyKakao = async (token: string): Promise<string | undefined> => {
+  return;
 };

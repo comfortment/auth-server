@@ -1,4 +1,3 @@
-import * as uuid from "uuid/v4";
 import { Handler, APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 
 import { verifyFacebook, verifyKakao } from "./oauth";
@@ -12,7 +11,7 @@ const handler: Handler = async (
   _,
   __
 ): Promise<APIGatewayProxyResult>  => {
-  let isValid: boolean;
+  let userId: string;
   const authorization = event.headers[AUTHORIZATION_HEADER].split(" ");
   const tokenType = authorization[0];
   const oauthToken = authorization[1];
@@ -20,7 +19,7 @@ const handler: Handler = async (
   switch (tokenType) {
     case 'facebook':
       try {
-        isValid = await verifyFacebook(oauthToken);
+        userId = await verifyFacebook(oauthToken);
       } catch (err) {
         return {statusCode: 500, body: ""};
       }
@@ -28,7 +27,7 @@ const handler: Handler = async (
     
     case 'kakao':
       try {
-        isValid = await verifyKakao(oauthToken);
+        userId = await verifyKakao(oauthToken);
       } catch (err) {
         return {statusCode: 500, body: ""};
       }
@@ -43,38 +42,36 @@ const handler: Handler = async (
       };
   }
 
-  if (isValid) {
-    const identity = uuid();
-
-    const accessToken = await generateJWT(
-      {id: identity, type: 'access'}, {expiresIn: JWT_ACCESS_TOKEN_EXPIRY}
-    );
-    const refreshToken = await generateJWT(
-      {id: identity, type: 'refresh'}, {expiresIn: JWT_REFRESH_TOKEN_EXPIRY}
-    );
-    
-    try {
-      await saveRefreshToken(identity, refreshToken);
-    } catch (err) {
-      return {statusCode: 500, body: ""};
-    }
-  
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        userId: identity,
-        accessToken,
-        refreshToken
-      })
-    };
-  } else {
+  if (!userId) {
     return {
       statusCode: 401,
       body: JSON.stringify({
         "message": "Fail social authentication"
       })
     };
+  } 
+
+  const accessToken = await generateJWT(
+    {id: userId, type: 'access'}, {expiresIn: JWT_ACCESS_TOKEN_EXPIRY}
+  );
+  const refreshToken = await generateJWT(
+    {id: userId, type: 'refresh'}, {expiresIn: JWT_REFRESH_TOKEN_EXPIRY}
+  );
+  
+  try {
+    await saveRefreshToken(userId, refreshToken);
+  } catch (err) {
+    return {statusCode: 500, body: ""};
   }
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      userId,
+      accessToken,
+      refreshToken
+    })
+  };  
 };
 
 export default handler;
