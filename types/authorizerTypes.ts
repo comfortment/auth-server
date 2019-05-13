@@ -6,12 +6,7 @@ export interface AuthorizerInput {
 
 export interface AuthorizerOutput {
   principalId: string,
-  policyDocument: PolicyDocument,
-  // context?: {
-  //   stringKey: string,
-  //   numberKey: number,
-  //   booleanKey: boolean
-  // }
+  policyDocument: PolicyDocument
 }
 
 export interface PolicyDocument {

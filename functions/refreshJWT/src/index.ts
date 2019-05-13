@@ -61,7 +61,10 @@ const handler: Handler = async (
   }
 
   const accessToken = jwt.sign(
-    {id: authTable.id, type: "JWT"}, jwtSecretKey, {expiresIn: JWT_ACCESS_TOKEN_EXPIRY}
+    {
+      id: authTable.id, type: "JWT", role: decodedToken.role},
+      jwtSecretKey,
+      {expiresIn: JWT_ACCESS_TOKEN_EXPIRY}
   );
 
   return {

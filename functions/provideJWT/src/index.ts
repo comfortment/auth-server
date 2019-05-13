@@ -52,10 +52,10 @@ const handler: Handler = async (
   } 
 
   const accessToken = await generateJWT(
-    {id: userId, type: 'access'}, {expiresIn: JWT_ACCESS_TOKEN_EXPIRY}
+    {id: userId, type: 'access', role: 'user'}, {expiresIn: JWT_ACCESS_TOKEN_EXPIRY}
   );
   const refreshToken = await generateJWT(
-    {id: userId, type: 'refresh'}, {expiresIn: JWT_REFRESH_TOKEN_EXPIRY}
+    {id: userId, type: 'refresh', role: 'user'}, {expiresIn: JWT_REFRESH_TOKEN_EXPIRY}
   );
   
   try {

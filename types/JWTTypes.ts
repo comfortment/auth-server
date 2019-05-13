@@ -1,6 +1,7 @@
 export interface JWTPayload {
   id: string,
-  type: string
+  type: string,
+  role: string
 }
 
 export interface JWTOptions {

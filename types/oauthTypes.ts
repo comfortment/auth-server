@@ -8,7 +8,7 @@ export interface DeveloperTokenPayload {
 export interface VerifyReponse {
   data: {
     data: {
-      userId?: string
+      user_id?: string
     }
   }
 }
