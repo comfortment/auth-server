@@ -1,7 +1,6 @@
 export interface AuthorizerInput {
   type: string,
-  authorizationToken: string,
-  methodArn: string
+  authorizationToken: string
 }
 
 export interface AuthorizerOutput {

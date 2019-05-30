@@ -4,7 +4,6 @@ import * as jwt from "jsonwebtoken";
 import { AuthorizerInput, AuthorizerOutput } from "../../../types/authorizerTypes";
 import { PolicyDocument, Statement } from "../../../types/authorizerTypes"
 import { JWTPayload } from "../../../types/JWTTypes";
-import { throws } from "assert";
 
 
 const handler: Handler = async (
@@ -24,7 +23,7 @@ const handler: Handler = async (
 
   if (decodedToken.type != "access") { throw "Unauthorized"; }
 
-  return await generatePolicy('user', 'Allow', event.methodArn);
+  return await generatePolicy('user', 'Allow', "*");
 };
 
 const generatePolicy = async (
